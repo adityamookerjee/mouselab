@@ -44,7 +44,7 @@ UPLOAD_COMPONENT = html.Div(
     ]
 )
 
-TOP_BANKS_PLOT = [
+UPLOAD_PLOT = [
     dbc.CardHeader(html.H5("Data Visualization")),
     dbc.CardBody(
         [
@@ -109,7 +109,7 @@ BODY = dbc.Container(
         dbc.Row(
             [
                 dbc.Col(LEFT_COLUMN, md=4, align="center"),
-                dbc.Col(dbc.Card(TOP_BANKS_PLOT), md=8),
+                dbc.Col(dbc.Card(UPLOAD_PLOT), md=8),
             ],
             style={"marginTop": 30},
         ),
