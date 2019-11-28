@@ -16,10 +16,11 @@ def parse_contents(contents, filename, date):
             # Assume that the user uploaded a CSV file
             df = pd.read_csv(
                 io.StringIO(decoded.decode("utf-8")),
-                header=None,
-                names=["Time", "Grip Strength"],
+                # header=None,
+                # names=["Time", "Grip Strength"],
             )
             df.set_index("Time", inplace=True)
+            df.dropna(axis=1,inplace=True)
             return df
 
     except Exception as e:

@@ -74,7 +74,7 @@ LEFT_COLUMN = dbc.Jumbotron(
         html.Hr(className="my-2"),
         html.Label("Upload Data", className="lead"),
         html.P(
-            "(<Enter File information here>)",
+            "Important! : In the .csv, the first column must be 'Time' and the second must be the 'Reading' ",
             style={"fontSize": 10, "font-weight": "lighter"},
         ),
         UPLOAD_COMPONENT,
