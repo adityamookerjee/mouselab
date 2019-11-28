@@ -24,30 +24,37 @@ app.layout = html.Div(children=[app_layout.NAVBAR, app_layout.BODY])
 app.title = "MouseLab"
 # Callbacks
 
-# Create Plot Figure
+# Store Data
 @app.callback(
-    Output("data-plot", "figure"),
+    Output("data-store", "data"),
     [Input("upload-data", "contents")],
     [State("upload-data", "filename"), State("upload-data", "last_modified")],
 )
 def update_output(content, name, date):
-    if content is not None:
+    if content:
         df = analysis_functions.parse_contents(content, name, date)
+        return df.to_dict("records")
+
+
+# Create Plot Figure
+@app.callback(Output("data-analysis-div", "children"), [Input("data-store", "data")])
+def update_plot(store_data):
+    if store_data:
+        df = pd.DataFrame(store_data)
         data, layout = analysis_functions.setup_graph(df)
-        return {"data": data, "layout": layout}
+        return [dcc.Graph(id="plot", figure={"data": data, "layout": layout})]
     else:
-        return {"data": []}
+        return []
 
 
 # Create Data Table
 @app.callback(
     [Output("data-table-div", "children"), Output("stats-table-div", "children")],
-    [Input("upload-data", "contents")],
-    [State("upload-data", "filename"), State("upload-data", "last_modified")],
+    [Input("data-store", "data")],
 )
-def update_output(content, name, date):
-    if content is not None:
-        df = analysis_functions.parse_contents(content, name, date)
+def update_data_table(store_data):
+    if store_data:
+        df = pd.DataFrame(store_data)
         return (
             [
                 dash_table.DataTable(

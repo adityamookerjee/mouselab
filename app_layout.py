@@ -50,11 +50,12 @@ UPLOAD_PLOT = [
         [
             dcc.Loading(
                 id="loading-banks-hist",
-                children=[dcc.Graph(id="data-plot")],
+                children=[html.Div(id="data-analysis-div")],
                 type="default",
             )
         ]
     ),
+    dcc.Store(id="data-store", storage_type="local"),
 ]
 
 DATA_TABLE = [
