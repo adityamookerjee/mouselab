@@ -1,7 +1,7 @@
 # MouseLab
 https://mouse-lab.herokuapp.com/
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/adityamookerjee/mouselab/master?filepath=https%3A%2F%2Fgithub.com%2Fadityamookerjee%2Fmouselab%2Fblob%2Fmaster%2FConcept%2520Notebook.ipynb)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/adityamookerjee/mouselab/master)
 
 ![mouse_lab_logo](https://www.freelogodesign.org/file/app/client/thumb/8b2e9def-4220-49c5-b7aa-eac3fa029999_200x200.png?1574902724769)
 
