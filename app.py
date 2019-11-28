@@ -20,7 +20,7 @@ import analysis_functions
 SERVER = flask.Flask(__name__)
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP], server=SERVER)
 app.layout = html.Div(children=[app_layout.NAVBAR, app_layout.BODY])
-
+app.title = "MouseLab"
 # Callbacks
 @app.callback(
     Output("data-plot", "figure"),

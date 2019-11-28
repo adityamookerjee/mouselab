@@ -2,7 +2,7 @@ import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 import dash_html_components as html
 
-PLOTLY_LOGO = "https://images.plot.ly/logo/new-branding/plotly-logomark.png"
+PLOTLY_LOGO = "https://www.freelogodesign.org/file/app/client/thumb/8b2e9def-4220-49c5-b7aa-eac3fa029999_200x200.png"
 
 NAVBAR = dbc.Navbar(
     children=[
@@ -11,7 +11,7 @@ NAVBAR = dbc.Navbar(
             dbc.Row(
                 [
                     dbc.Col(html.Img(src=PLOTLY_LOGO, height="30px")),
-                    dbc.Col(dbc.NavbarBrand("Mouse Lab", className="ml-2")),
+                    dbc.Col(dbc.NavbarBrand("MouseLab", className="ml-2")),
                 ],
                 align="center",
                 no_gutters=True,
