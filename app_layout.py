@@ -57,6 +57,11 @@ UPLOAD_PLOT = [
     ),
 ]
 
+DATA_TABLE = [
+    dbc.CardHeader(html.H5("Data Table")),
+    dbc.CardBody([html.Div(id="data-table-div")]),
+]
+
 LEFT_COLUMN = dbc.Jumbotron(
     [
         html.H4(children="Upload and Configure Experiment", className="display-5"),
@@ -67,40 +72,6 @@ LEFT_COLUMN = dbc.Jumbotron(
             style={"fontSize": 10, "font-weight": "lighter"},
         ),
         UPLOAD_COMPONENT,
-        # dcc.Slider(
-        #     id="n-selection-slider",
-        #     min=1,
-        #     max=100,
-        #     step=1,
-        #     marks={
-        #         0: "0%",
-        #         10: "",
-        #         20: "20%",
-        #         30: "",
-        #         40: "40%",
-        #         50: "",
-        #         60: "60%",
-        #         70: "",
-        #         80: "80%",
-        #         90: "",
-        #         100: "100%",
-        #     },
-        #     value=20,
-        # ),
-        # html.Label("Select a bank", style={"marginTop": 50}, className="lead"),
-        # html.P(
-        #     "(You can use the dropdown or click the barchart on the right)",
-        #     style={"fontSize": 10, "font-weight": "lighter"},
-        # ),
-        # dcc.Dropdown(
-        #     id="bank-drop", clearable=False, style={"marginBottom": 50, "font-size": 12}
-        # ),
-        # html.Label("Select time frame", className="lead"),
-        # html.Div(dcc.RangeSlider(id="time-window-slider"), style={"marginBottom": 50}),
-        # html.P(
-        #     "(You can define the time frame down to month granularity)",
-        #     style={"fontSize": 10, "font-weight": "lighter"},
-        # ),
     ]
 )
 
@@ -110,9 +81,9 @@ BODY = dbc.Container(
             [
                 dbc.Col(LEFT_COLUMN, md=4, align="center"),
                 dbc.Col(dbc.Card(UPLOAD_PLOT), md=8),
-            ],
-            style={"marginTop": 30},
+            ]
         ),
+        dbc.Card(DATA_TABLE,style={"marginTop": 50})
         # dbc.Card(WORDCLOUD_PLOTS),
         # dbc.Row([dbc.Col([dbc.Card(LDA_PLOTS)])], style={"marginTop": 50}),
     ],

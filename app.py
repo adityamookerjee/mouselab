@@ -8,6 +8,7 @@ from dash.dependencies import Output, Input, State
 import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 import dash_html_components as html
+import dash_table
 import plotly.graph_objs as go
 import pandas as pd
 import numpy as np
@@ -22,6 +23,8 @@ app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP], server=SE
 app.layout = html.Div(children=[app_layout.NAVBAR, app_layout.BODY])
 app.title = "MouseLab"
 # Callbacks
+
+# Create Plot Figure
 @app.callback(
     Output("data-plot", "figure"),
     [Input("upload-data", "contents")],
@@ -29,11 +32,32 @@ app.title = "MouseLab"
 )
 def update_output(content, name, date):
     if content is not None:
-        df = analysis_functions.parse_contents(content,name,date)
-        data,layout = analysis_functions.setup_graph(df)
+        df = analysis_functions.parse_contents(content, name, date)
+        data, layout = analysis_functions.setup_graph(df)
         return {"data": data, "layout": layout}
     else:
-        return {"data":[]}
+        return {"data": []}
+
+
+# Create Data Table
+@app.callback(
+    Output("data-table-div", "children"),
+    [Input("upload-data", "contents")],
+    [State("upload-data", "filename"), State("upload-data", "last_modified")],
+)
+def update_output(content, name, date):
+    if content is not None:
+        df = analysis_functions.parse_contents(content, name, date)
+        df.reset_index(inplace=True)
+        return [
+            dash_table.DataTable(
+                style_data={"whiteSpace": "normal", "height": "auto"},
+                style_table={"maxHeight": "300px", "overflowY": "scroll"},
+                id="table",
+                columns=[{"name": i, "id": i} for i in df.columns],
+                data=df.to_dict("records"),
+            )
+        ]
 
 
 if __name__ == "__main__":
