@@ -15,6 +15,7 @@ dash-table = "*"
 dash-bootstrap-components = "*"
 scipy = "*"
 gunicorn = "*"
+pyod = "*"
 
 [requires]
 python_version = "3.7"

@@ -41,23 +41,35 @@ def update_output(content, name, date):
 
 # Create Data Table
 @app.callback(
-    Output("data-table-div", "children"),
+    [Output("data-table-div", "children"), Output("stats-table-div", "children")],
     [Input("upload-data", "contents")],
     [State("upload-data", "filename"), State("upload-data", "last_modified")],
 )
 def update_output(content, name, date):
     if content is not None:
         df = analysis_functions.parse_contents(content, name, date)
-        df.reset_index(inplace=True)
-        return [
-            dash_table.DataTable(
-                style_data={"whiteSpace": "normal", "height": "auto"},
-                style_table={"maxHeight": "300px", "overflowY": "scroll"},
-                id="table",
-                columns=[{"name": i, "id": i} for i in df.columns],
-                data=df.to_dict("records"),
-            )
-        ]
+        return (
+            [
+                dash_table.DataTable(
+                    style_data={"whiteSpace": "normal", "height": "auto"},
+                    style_table={"maxHeight": "300px", "overflowY": "scroll"},
+                    id="data-table",
+                    columns=[{"name": i, "id": i} for i in df.reset_index().columns],
+                    data=df.reset_index().to_dict("records"),
+                )
+            ],
+            [
+                dash_table.DataTable(
+                    style_data={"whiteSpace": "normal", "height": "auto"},
+                    style_table={"maxHeight": "300px", "overflowY": "scroll"},
+                    id="stats-table",
+                    columns=[{"name": i, "id": i} for i in df.describe().reset_index()],
+                    data=df.describe().reset_index().to_dict("records"),
+                )
+            ],
+        )
+    else:
+        return None, None
 
 
 if __name__ == "__main__":

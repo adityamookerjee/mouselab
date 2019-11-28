@@ -62,6 +62,11 @@ DATA_TABLE = [
     dbc.CardBody([html.Div(id="data-table-div")]),
 ]
 
+STATS = [
+    dbc.CardHeader(html.H5("Statistics")),
+    dbc.CardBody([html.Div(id="stats-table-div")]),
+]
+
 LEFT_COLUMN = dbc.Jumbotron(
     [
         html.H4(children="Upload and Configure Experiment", className="display-5"),
@@ -83,7 +88,10 @@ BODY = dbc.Container(
                 dbc.Col(dbc.Card(UPLOAD_PLOT), md=8),
             ]
         ),
-        dbc.Card(DATA_TABLE,style={"marginTop": 50})
+        dbc.Row(
+            [dbc.Col(dbc.Card(DATA_TABLE), md=4), dbc.Col(dbc.Card(STATS), md=8)],
+            style={"marginTop": 50},
+        ),
         # dbc.Card(WORDCLOUD_PLOTS),
         # dbc.Row([dbc.Col([dbc.Card(LDA_PLOTS)])], style={"marginTop": 50}),
     ],
